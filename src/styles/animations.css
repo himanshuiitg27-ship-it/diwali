@@ -1,0 +1,139 @@
+/* ---------- Diya flame ---------- */
+.flame-wrap {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 0.6s ease;
+}
+.diya-lit .flame-wrap {
+  transform: scale(var(--boost, 1));
+  opacity: 1;
+}
+.flame-flicker {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flicker 2.1s ease-in-out infinite;
+}
+.flame-inner {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flicker-inner 1.5s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) rotate(0deg); }
+  15% { transform: scale(0.96, 1.05) rotate(-2.2deg); }
+  32% { transform: scale(1.04, 0.96) rotate(1.8deg); }
+  50% { transform: scale(0.97, 1.07) rotate(-1deg); }
+  68% { transform: scale(1.03, 0.98) rotate(2.4deg); }
+  85% { transform: scale(0.98, 1.04) rotate(-1.6deg); }
+}
+@keyframes flicker-inner {
+  0%, 100% { transform: scale(1, 1); opacity: 0.95; }
+  40% { transform: scale(0.9, 1.08); opacity: 1; }
+  70% { transform: scale(1.06, 0.95); opacity: 0.85; }
+}
+
+.diya-glow {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  width: 260%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(0.2);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 199, 107, 0.55) 0%, rgba(255, 170, 70, 0.22) 30%, rgba(255, 140, 60, 0.06) 55%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.8s ease;
+}
+.diya-lit .diya-glow {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(var(--boost, 1));
+  animation: glow-breathe 3.2s ease-in-out infinite;
+}
+@keyframes glow-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.18); }
+}
+
+/* ---------- Misc ---------- */
+@keyframes sheen {
+  0%, 55% { left: -60%; }
+  100% { left: 140%; }
+}
+
+@keyframes float-heart {
+  0% { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
+  12% { opacity: 0.95; transform: translate3d(0, -4vh, 0) scale(1); }
+  100% { transform: translate3d(var(--drift, 20px), -85vh, 0) scale(1.15) rotate(var(--rot, 10deg)); opacity: 0; }
+}
+.floating-heart {
+  position: absolute;
+  bottom: -2rem;
+  pointer-events: none;
+  animation: float-heart var(--dur, 7s) ease-in forwards;
+  filter: drop-shadow(0 0 8px rgba(239, 166, 184, 0.6));
+}
+
+@keyframes petal-fall {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  100% { transform: translate3d(var(--sway, 40px), 110vh, 0) rotate(var(--spin, 360deg)); opacity: 0.8; }
+}
+.petal {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #f3a6b6, #c9506f);
+  animation: petal-fall var(--dur, 14s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes rangoli-spin {
+  to { transform: rotate(360deg); }
+}
+.rangoli-spin {
+  animation: rangoli-spin 140s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes pulse-heart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+.caret::after {
+  content: '|';
+  margin-left: 2px;
+  color: var(--warm-gold);
+  animation: caret-blink 0.9s steps(1) infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.bob {
+  animation: bob 4s ease-in-out infinite;
+}
+
+@keyframes lantern-sway {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
+}
+.lantern-sway {
+  transform-origin: 50% 0%;
+  animation: lantern-sway 6s ease-in-out infinite;
+}
